@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagementSystem.Persitence.Migrations
 {
     [DbContext(typeof(ManagementSystemDbContext))]
-    [Migration("20241114222732_mig3")]
-    partial class mig3
+    [Migration("20241115222734_mig4")]
+    partial class mig4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,19 +89,19 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 27, 32, 532, DateTimeKind.Local).AddTicks(8152),
+                            CreateDate = new DateTime(2024, 11, 16, 1, 27, 34, 100, DateTimeKind.Local).AddTicks(7970),
                             StatusName = "Onaylandı"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 27, 32, 532, DateTimeKind.Local).AddTicks(8159),
+                            CreateDate = new DateTime(2024, 11, 16, 1, 27, 34, 100, DateTimeKind.Local).AddTicks(7980),
                             StatusName = "İptal Edildi"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 27, 32, 532, DateTimeKind.Local).AddTicks(8160),
+                            CreateDate = new DateTime(2024, 11, 16, 1, 27, 34, 100, DateTimeKind.Local).AddTicks(7981),
                             StatusName = "Tamamlandı"
                         });
                 });
@@ -133,19 +133,19 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 27, 32, 532, DateTimeKind.Local).AddTicks(8228),
+                            CreateDate = new DateTime(2024, 11, 16, 1, 27, 34, 100, DateTimeKind.Local).AddTicks(8125),
                             Name = "Egzoz Gazı Ölçümü"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 27, 32, 532, DateTimeKind.Local).AddTicks(8229),
+                            CreateDate = new DateTime(2024, 11, 16, 1, 27, 34, 100, DateTimeKind.Local).AddTicks(8126),
                             Name = "Fren Testi"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 27, 32, 532, DateTimeKind.Local).AddTicks(8230),
+                            CreateDate = new DateTime(2024, 11, 16, 1, 27, 34, 100, DateTimeKind.Local).AddTicks(8127),
                             Name = "Far Ayarı"
                         });
                 });
@@ -163,8 +163,7 @@ namespace ManagementSystem.Persitence.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -178,12 +177,9 @@ namespace ManagementSystem.Persitence.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -201,8 +197,7 @@ namespace ManagementSystem.Persitence.Migrations
 
                     b.Property<string>("RoleName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -215,13 +210,13 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 27, 32, 532, DateTimeKind.Local).AddTicks(8241),
+                            CreateDate = new DateTime(2024, 11, 16, 1, 27, 34, 100, DateTimeKind.Local).AddTicks(8147),
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 27, 32, 532, DateTimeKind.Local).AddTicks(8242),
+                            CreateDate = new DateTime(2024, 11, 16, 1, 27, 34, 100, DateTimeKind.Local).AddTicks(8148),
                             RoleName = "User"
                         });
                 });
@@ -253,17 +248,6 @@ namespace ManagementSystem.Persitence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ManagementSystem.Domain.User", b =>
-                {
-                    b.HasOne("ManagementSystem.Domain.UserRole", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("ManagementSystem.Domain.AppointmentStatus", b =>
                 {
                     b.Navigation("Appointments");
@@ -277,11 +261,6 @@ namespace ManagementSystem.Persitence.Migrations
             modelBuilder.Entity("ManagementSystem.Domain.User", b =>
                 {
                     b.Navigation("Appointments");
-                });
-
-            modelBuilder.Entity("ManagementSystem.Domain.UserRole", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

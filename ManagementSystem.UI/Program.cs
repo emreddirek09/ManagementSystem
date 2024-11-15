@@ -1,23 +1,35 @@
 using ManagementSystem.Persitence;
-using ManagementSystem.Persitence.Contexts;
-using System;
+using ManagementSystem.Application;
+using ManagementSystem.Infrastructure.Securities;
+using ManagementSystem.Domain;
+using ManagementSystem.Application.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
- 
-builder.Services.AddPersistenceServices();
+
 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddPersistenceServices();
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddScoped<ISecurity, Security>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
-  
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/Signin/Index");
     app.UseHsts();
 }
 
@@ -30,6 +42,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Signin}/{action=Index}/{id?}");
+    pattern: "{controller=Signup}/{action=Index}/{id?}");
 
 app.Run();

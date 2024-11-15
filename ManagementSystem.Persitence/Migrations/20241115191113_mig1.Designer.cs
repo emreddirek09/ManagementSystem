@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagementSystem.Persitence.Migrations
 {
     [DbContext(typeof(ManagementSystemDbContext))]
-    [Migration("20241114222449_mig1")]
+    [Migration("20241115191113_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -89,19 +89,19 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5387),
+                            CreateDate = new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8056),
                             StatusName = "Onaylandı"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5395),
+                            CreateDate = new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8067),
                             StatusName = "İptal Edildi"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5397),
+                            CreateDate = new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8068),
                             StatusName = "Tamamlandı"
                         });
                 });
@@ -133,19 +133,19 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5463),
+                            CreateDate = new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8159),
                             Name = "Egzoz Gazı Ölçümü"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5464),
+                            CreateDate = new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8161),
                             Name = "Fren Testi"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5465),
+                            CreateDate = new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8162),
                             Name = "Far Ayarı"
                         });
                 });
@@ -215,14 +215,14 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5477),
-                            RoleName = "Egzoz Gazı Ölçümü"
+                            CreateDate = new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8178),
+                            RoleName = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5478),
-                            RoleName = "Fren Testi"
+                            CreateDate = new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8179),
+                            RoleName = "User"
                         });
                 });
 

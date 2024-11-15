@@ -6,137 +6,162 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ManagementSystem.Persitence.Migrations
 {
     /// <inheritdoc />
-    public partial class mig2 : Migration
+    public partial class mig3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "s",
-                table: "Appointments",
+            migrationBuilder.AlterColumn<string>(
+                name: "Username",
+                table: "Users",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                oldClrType: typeof(string),
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Email",
+                table: "Users",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100);
 
             migrationBuilder.UpdateData(
                 table: "AppointmentStatuses",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 26, 50, 838, DateTimeKind.Local).AddTicks(2409));
+                value: new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2019));
 
             migrationBuilder.UpdateData(
                 table: "AppointmentStatuses",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 26, 50, 838, DateTimeKind.Local).AddTicks(2418));
+                value: new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2028));
 
             migrationBuilder.UpdateData(
                 table: "AppointmentStatuses",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 26, 50, 838, DateTimeKind.Local).AddTicks(2419));
+                value: new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2030));
 
             migrationBuilder.UpdateData(
                 table: "Services",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 26, 50, 838, DateTimeKind.Local).AddTicks(2503));
+                value: new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2144));
 
             migrationBuilder.UpdateData(
                 table: "Services",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 26, 50, 838, DateTimeKind.Local).AddTicks(2504));
+                value: new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2146));
 
             migrationBuilder.UpdateData(
                 table: "Services",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 26, 50, 838, DateTimeKind.Local).AddTicks(2505));
+                value: new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2147));
 
             migrationBuilder.UpdateData(
                 table: "UserRoles",
                 keyColumn: "Id",
                 keyValue: 1,
-                columns: new[] { "CreateDate", "RoleName" },
-                values: new object[] { new DateTime(2024, 11, 15, 1, 26, 50, 838, DateTimeKind.Local).AddTicks(2518), "Admin" });
+                column: "CreateDate",
+                value: new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2164));
 
             migrationBuilder.UpdateData(
                 table: "UserRoles",
                 keyColumn: "Id",
                 keyValue: 2,
-                columns: new[] { "CreateDate", "RoleName" },
-                values: new object[] { new DateTime(2024, 11, 15, 1, 26, 50, 838, DateTimeKind.Local).AddTicks(2519), "User" });
+                column: "CreateDate",
+                value: new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2165));
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "s",
-                table: "Appointments");
+            migrationBuilder.AlterColumn<string>(
+                name: "Username",
+                table: "Users",
+                type: "nvarchar(100)",
+                maxLength: 100,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Email",
+                table: "Users",
+                type: "nvarchar(100)",
+                maxLength: 100,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
 
             migrationBuilder.UpdateData(
                 table: "AppointmentStatuses",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5387));
+                value: new DateTime(2024, 11, 16, 0, 40, 50, 128, DateTimeKind.Local).AddTicks(1576));
 
             migrationBuilder.UpdateData(
                 table: "AppointmentStatuses",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5395));
+                value: new DateTime(2024, 11, 16, 0, 40, 50, 128, DateTimeKind.Local).AddTicks(1585));
 
             migrationBuilder.UpdateData(
                 table: "AppointmentStatuses",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5397));
+                value: new DateTime(2024, 11, 16, 0, 40, 50, 128, DateTimeKind.Local).AddTicks(1587));
 
             migrationBuilder.UpdateData(
                 table: "Services",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5463));
+                value: new DateTime(2024, 11, 16, 0, 40, 50, 128, DateTimeKind.Local).AddTicks(1694));
 
             migrationBuilder.UpdateData(
                 table: "Services",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5464));
+                value: new DateTime(2024, 11, 16, 0, 40, 50, 128, DateTimeKind.Local).AddTicks(1696));
 
             migrationBuilder.UpdateData(
                 table: "Services",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreateDate",
-                value: new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5465));
+                value: new DateTime(2024, 11, 16, 0, 40, 50, 128, DateTimeKind.Local).AddTicks(1697));
 
             migrationBuilder.UpdateData(
                 table: "UserRoles",
                 keyColumn: "Id",
                 keyValue: 1,
-                columns: new[] { "CreateDate", "RoleName" },
-                values: new object[] { new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5477), "Egzoz Gazı Ölçümü" });
+                column: "CreateDate",
+                value: new DateTime(2024, 11, 16, 0, 40, 50, 128, DateTimeKind.Local).AddTicks(1712));
 
             migrationBuilder.UpdateData(
                 table: "UserRoles",
                 keyColumn: "Id",
                 keyValue: 2,
-                columns: new[] { "CreateDate", "RoleName" },
-                values: new object[] { new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5478), "Fren Testi" });
+                column: "CreateDate",
+                value: new DateTime(2024, 11, 16, 0, 40, 50, 128, DateTimeKind.Local).AddTicks(1714));
         }
     }
 }

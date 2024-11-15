@@ -11,7 +11,7 @@ namespace ManagementSystem.Persitence.Contexts
 {
     public class ManagementSystemDbContext : DbContext
     {
-        public ManagementSystemDbContext(DbContextOptions<ManagementSystemDbContext> options)
+        public ManagementSystemDbContext(DbContextOptions options)
         : base(options)
         {
         }
@@ -46,7 +46,14 @@ namespace ManagementSystem.Persitence.Contexts
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var datas = ChangeTracker.Entries<BaseEntity>();
-
+            var users = ChangeTracker.Entries<User>();
+            if (EntityState.Added is EntityState.Added)
+            {
+                foreach (var us in users)
+                {
+                    us.Entity.RoleId = 2;
+                }
+            }
             foreach (var data in datas)
             {
                 _ = data.State switch

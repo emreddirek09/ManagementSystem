@@ -1,28 +1,31 @@
 ﻿using ManagementSystem.Application.Repositories;
-using Microsoft.AspNetCore.DataProtection; 
+using ManagementSystem.Application.Repositories.Users;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace ManagementSystem.Infrastructure.Securities
 {
-    public class Security : ICipherService
+    public class Security : ISecurity
     {
         //Method 1 Two Way-----------------------------------------------------------------------
         private readonly IDataProtectionProvider _dataProtectionProvider;
-        private const string Key = "cut-the-night-with-the-light";
-         
 
-        public Security(IDataProtectionProvider dataProtectionProvider, string encrypt, string decrypt)
+        public Security(IDataProtectionProvider dataProtectionProvider)
         {
-            _dataProtectionProvider = dataProtectionProvider; 
+            _dataProtectionProvider = dataProtectionProvider;
         }
 
         public string Encrypt(string input)
         {
+            string Key = "emre-direk-bilisim-sistemleri-mühendisi";
+
             var protector = _dataProtectionProvider.CreateProtector(Key);
             return protector.Protect(input);
         }
 
         public string Decrypt(string input)
         {
+            string Key = "emre-direk-bilisim-sistemleri-mühendisi";
+
             var protector = _dataProtectionProvider.CreateProtector(Key);
             return protector.Unprotect(input);
         }

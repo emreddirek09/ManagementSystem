@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 namespace ManagementSystem.Domain
 {
     public class UserRole:BaseEntity
-    { 
-        [Required]
-        [MaxLength(50)]
+    {  
         public string RoleName { get; set; }
 
         public ICollection<User> Users { get; set; } // User ile bire-çoğa ilişki

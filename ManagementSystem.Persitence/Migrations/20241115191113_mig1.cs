@@ -123,9 +123,9 @@ namespace ManagementSystem.Persitence.Migrations
                 columns: new[] { "Id", "CreateDate", "StatusName", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5387), "Onaylandı", null },
-                    { 2, new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5395), "İptal Edildi", null },
-                    { 3, new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5397), "Tamamlandı", null }
+                    { 1, new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8056), "Onaylandı", null },
+                    { 2, new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8067), "İptal Edildi", null },
+                    { 3, new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8068), "Tamamlandı", null }
                 });
 
             migrationBuilder.InsertData(
@@ -133,9 +133,9 @@ namespace ManagementSystem.Persitence.Migrations
                 columns: new[] { "Id", "CreateDate", "Name", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5463), "Egzoz Gazı Ölçümü", null },
-                    { 2, new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5464), "Fren Testi", null },
-                    { 3, new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5465), "Far Ayarı", null }
+                    { 1, new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8159), "Egzoz Gazı Ölçümü", null },
+                    { 2, new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8161), "Fren Testi", null },
+                    { 3, new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8162), "Far Ayarı", null }
                 });
 
             migrationBuilder.InsertData(
@@ -143,8 +143,8 @@ namespace ManagementSystem.Persitence.Migrations
                 columns: new[] { "Id", "CreateDate", "RoleName", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5477), "Egzoz Gazı Ölçümü", null },
-                    { 2, new DateTime(2024, 11, 15, 1, 24, 49, 130, DateTimeKind.Local).AddTicks(5478), "Fren Testi", null }
+                    { 1, new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8178), "Admin", null },
+                    { 2, new DateTime(2024, 11, 15, 22, 11, 12, 909, DateTimeKind.Local).AddTicks(8179), "User", null }
                 });
 
             migrationBuilder.CreateIndex(

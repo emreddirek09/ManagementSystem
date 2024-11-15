@@ -16,7 +16,7 @@ namespace ManagementSystem.Persitence
                 ConfigurationManager configurationManager = new ConfigurationManager();
                 configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../ManagementSystem.UI"));
                 configurationManager.AddJsonFile("appsettings.json");
-                return configurationManager.GetConnectionString("MsSql");
+                return configurationManager.GetConnectionString("DefaultConnection");
             }
 
         }

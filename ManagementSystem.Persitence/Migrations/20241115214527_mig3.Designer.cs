@@ -4,6 +4,7 @@ using ManagementSystem.Persitence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagementSystem.Persitence.Migrations
 {
     [DbContext(typeof(ManagementSystemDbContext))]
-    partial class ManagementSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241115214527_mig3")]
+    partial class mig3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,19 +89,19 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 16, 1, 31, 39, 129, DateTimeKind.Local).AddTicks(4784),
+                            CreateDate = new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2019),
                             StatusName = "Onaylandı"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 16, 1, 31, 39, 129, DateTimeKind.Local).AddTicks(4794),
+                            CreateDate = new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2028),
                             StatusName = "İptal Edildi"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 11, 16, 1, 31, 39, 129, DateTimeKind.Local).AddTicks(4795),
+                            CreateDate = new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2030),
                             StatusName = "Tamamlandı"
                         });
                 });
@@ -130,19 +133,19 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 16, 1, 31, 39, 129, DateTimeKind.Local).AddTicks(4911),
+                            CreateDate = new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2144),
                             Name = "Egzoz Gazı Ölçümü"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 16, 1, 31, 39, 129, DateTimeKind.Local).AddTicks(4913),
+                            CreateDate = new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2146),
                             Name = "Fren Testi"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 11, 16, 1, 31, 39, 129, DateTimeKind.Local).AddTicks(4913),
+                            CreateDate = new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2147),
                             Name = "Far Ayarı"
                         });
                 });
@@ -196,7 +199,8 @@ namespace ManagementSystem.Persitence.Migrations
 
                     b.Property<string>("RoleName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -209,13 +213,13 @@ namespace ManagementSystem.Persitence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 16, 1, 31, 39, 129, DateTimeKind.Local).AddTicks(4927),
+                            CreateDate = new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2164),
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 11, 16, 1, 31, 39, 129, DateTimeKind.Local).AddTicks(4929),
+                            CreateDate = new DateTime(2024, 11, 16, 0, 45, 27, 212, DateTimeKind.Local).AddTicks(2165),
                             RoleName = "User"
                         });
                 });

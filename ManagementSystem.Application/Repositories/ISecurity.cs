@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Application.Repositories
 {
-    public interface ICipherService
+    public interface ISecurity
     {
         public string Encrypt(string cipherText);
         public string Decrypt(string cipherText);
