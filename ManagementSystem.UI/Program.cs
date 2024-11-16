@@ -1,8 +1,8 @@
 using ManagementSystem.Persitence;
 using ManagementSystem.Application;
-using ManagementSystem.Infrastructure.Securities;
 using ManagementSystem.Domain;
-using ManagementSystem.Application.Repositories;
+using ManagementSystem.Application.Repositories; 
+using ManagementSystem.Persitence.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddScoped<ISecurity, Security>();
+builder.Services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<ManagementSystemDbContext>();
 
 builder.Services.AddCors(options =>
 {

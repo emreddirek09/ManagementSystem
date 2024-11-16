@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Persitence.Repositories
 {
-    public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
+    public class ReadRepository<T> : IReadRepository<T> where T : class
     {
         private readonly ManagementSystemDbContext _context;
 
@@ -30,14 +30,7 @@ namespace ManagementSystem.Persitence.Repositories
             return query;
         }
 
-        public async Task<T> GetByIdAsync(int id, bool tracking = true)
-        {
-            var query = table.AsQueryable();
-            if (!tracking)
-                query = query.AsNoTracking();
-            return await query.FirstOrDefaultAsync(d => d.Id == id);
-        }
-
+      
         public async Task<T> GetSingleAsync(Expression<Func<T, bool>> expression, bool tracking = true)
         {
             var query = table.AsQueryable();

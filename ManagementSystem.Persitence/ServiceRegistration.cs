@@ -1,8 +1,8 @@
-﻿using ManagementSystem.Application.Repositories.Users;
+﻿using ManagementSystem.Application.Repositories.Users; 
 using ManagementSystem.Persitence.Contexts;
 using ManagementSystem.Persitence.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection; 
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ManagementSystem.Persitence
 {
@@ -13,7 +13,6 @@ namespace ManagementSystem.Persitence
             services.AddDbContext<ManagementSystemDbContext>(options => options.UseSqlServer(Configuration.ConnectionString));
             services.AddScoped<IUserReadRepository, UserReadRepository>();
             services.AddScoped<IUserWriteRepository, UserWriteRepository>();
-
             //services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             //services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             //services.AddScoped<IOrderReadRepository, OrderReadRepository>();

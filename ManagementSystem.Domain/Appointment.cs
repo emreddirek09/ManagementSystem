@@ -16,17 +16,17 @@ namespace ManagementSystem.Domain
         public DateTime AppointmentDate { get; set; }
 
         [Required]
-        public int StatusId { get; set; }
+        public string StatusId { get; set; }
         [ForeignKey("StatusId")]
         public AppointmentStatus Status { get; set; } // Appointment ile AppointmentStatus arasında ilişki
 
         [Required]
-        public int ServiceId { get; set; }
+        public string ServiceId { get; set; }
         [ForeignKey("ServiceId")]
         public Service Service { get; set; } // Appointment ile Service arasında ilişki
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; } // Appointment ile User arasında ilişki
     }

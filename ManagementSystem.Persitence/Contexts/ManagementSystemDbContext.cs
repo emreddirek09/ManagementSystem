@@ -1,20 +1,17 @@
 ﻿using ManagementSystem.Domain;
-using ManagementSystem.Domain.Common;
+using ManagementSystem.Domain.Common; 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManagementSystem.Persitence.Contexts
 {
-    public class ManagementSystemDbContext : DbContext
+    public class ManagementSystemDbContext : IdentityDbContext<User, UserRole, string>
     {
-        public ManagementSystemDbContext(DbContextOptions options)
-        : base(options)
+        public ManagementSystemDbContext(DbContextOptions options) : base(options)
         {
         }
+
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
         public DbSet<Service> Services { get; set; }
@@ -23,37 +20,46 @@ namespace ManagementSystem.Persitence.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+                .HasKey(login => new { login.LoginProvider, login.ProviderKey });
+
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .HasKey(userRole => new { userRole.UserId, userRole.RoleId });
+
+            modelBuilder.Entity<IdentityUserToken<string>>()
+                .HasKey(token => new { token.UserId, token.LoginProvider, token.Name });
+
             modelBuilder.Entity<AppointmentStatus>()
                 .HasData(
-                new AppointmentStatus() { Id = 1, Appointments = null, StatusName = "Onaylandı", CreateDate = DateTime.Now, UpdateDate = null },
-                new AppointmentStatus() { Id = 2, Appointments = null, StatusName = "İptal Edildi", CreateDate = DateTime.Now, UpdateDate = null },
-                new AppointmentStatus() { Id = 3, Appointments = null, StatusName = "Tamamlandı", CreateDate = DateTime.Now, UpdateDate = null }
+                new AppointmentStatus() { Id = "1", Appointments = null, StatusName = "Onaylandı", CreateDate = DateTime.Now, UpdateDate = null },
+                new AppointmentStatus() { Id = "2", Appointments = null, StatusName = "İptal Edildi", CreateDate = DateTime.Now, UpdateDate = null },
+                new AppointmentStatus() { Id = "3", Appointments = null, StatusName = "Tamamlandı", CreateDate = DateTime.Now, UpdateDate = null }
                 );
 
             modelBuilder.Entity<Service>()
               .HasData(
-              new Service() { Id = 1, Appointments = null, Name = "Egzoz Gazı Ölçümü", CreateDate = DateTime.Now, UpdateDate = null },
-              new Service() { Id = 2, Appointments = null, Name = "Fren Testi", CreateDate = DateTime.Now, UpdateDate = null },
-              new Service() { Id = 3, Appointments = null, Name = "Far Ayarı", CreateDate = DateTime.Now, UpdateDate = null }
-              );
+              new Service() { Id = "1", Appointments = null, Name = "Egzoz Gazı Ölçümü", CreateDate = DateTime.Now, UpdateDate = null },
+              new Service() { Id = "2", Appointments = null, Name = "Fren Testi", CreateDate = DateTime.Now, UpdateDate = null },
+              new Service() { Id = "3", Appointments = null, Name = "Far Ayarı", CreateDate = DateTime.Now, UpdateDate = null }
+              );                   
             modelBuilder.Entity<UserRole>()
             .HasData(
-            new UserRole() { Id = 1, RoleName = "Admin", CreateDate = DateTime.Now, UpdateDate = null },
-            new UserRole() { Id = 2, RoleName = "User", CreateDate = DateTime.Now, UpdateDate = null }
+            new UserRole() { Id = "1", Name = "Admin" },
+            new UserRole() { Id = "2", Name = "User" }
             );
 
         }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var datas = ChangeTracker.Entries<BaseEntity>();
-            var users = ChangeTracker.Entries<User>();
-            if (EntityState.Added is EntityState.Added)
-            {
-                foreach (var us in users)
-                {
-                    us.Entity.RoleId = 2;
-                }
-            }
+            //var users = ChangeTracker.Entries<User>();
+            //if (EntityState.Added is EntityState.Added)
+            //{
+            //    foreach (var us in users)
+            //    {
+            //        us.Entity.RoleId = 2;
+            //    }
+            //}
             foreach (var data in datas)
             {
                 _ = data.State switch

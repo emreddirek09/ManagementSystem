@@ -11,7 +11,7 @@ using ManagementSystem.Persitence.Contexts;
 
 namespace ManagementSystem.Persitence.Repositories
 {
-    public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
+    public class WriteRepository<T> : IWriteRepository<T> where T : class
     {
         private readonly ManagementSystemDbContext _context;
 
@@ -39,15 +39,7 @@ namespace ManagementSystem.Persitence.Repositories
             EntityEntry entityEntry = table.Remove(values);
             return entityEntry.State == EntityState.Deleted;
         }
-
-        public async Task<bool> DeleteAsync(int id)
-        {
-
-            T model = await table.FirstOrDefaultAsync(data => data.Id == id);
-            return Delete(model);
-
-
-        }
+         
 
         public bool DeleteRange(List<T> values)
         {
