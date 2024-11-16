@@ -9,7 +9,7 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
 {
     public class LoginUserQueryRequest : IRequest<LoginUserQueryResponse>
     {
-        public string UserName { get; set; }
+        public string UserNameOrMail { get; set; }
         public string UserPassword { get; set; }
     }
 }

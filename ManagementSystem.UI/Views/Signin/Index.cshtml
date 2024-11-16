@@ -58,8 +58,8 @@
                                     <form class="needs-validation" method="post" action="/" id="LoginForm">
                                          
                                         <div class="mb-3">
-                                            <label class="form-label">Kullanıcı Adı <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="UserName" placeholder="Kullanıcı adı ya da mail giriniz" required="">
+                                            <label class="form-label">Kullanıcı Adı & EMail<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="UserNameOrMail" placeholder="Kullanıcı adı & mail giriniz" required="">
                                             <div class="invalid-feedback">
                                                 Lütfen kullanıcı adınızı giriniz
                                             </div>
@@ -118,15 +118,18 @@
     <script src="~/velzon/assets/js/pages/form-validation.init.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
 
     <script>
-                $(document).ready(function () {
+        $(document).ready(function () {
             $("#GirisYap").click(function (event) {
                 event.preventDefault();
                 var formData = {
-                    UserName: $("#UserName").val(),
+                    UserNameOrMail: $("#UserNameOrMail").val(),
                     UserPassword: $("#UserPassword").val()
-                }; 
+                };
                 $.ajax({
                     url: '/Signin/_GirisYap',
                     type: 'post',
@@ -134,28 +137,45 @@
                     data: JSON.stringify(formData),
                     success: function (response) {
                         if (response.success) {
-                            $("#responseMessage").text(response.message).css("color", "green");
-                            alert(response.message);
-                            window.location.href = '/Users/Index';
+                            // SweetAlert Success
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Başarıyla Giriş Yapıldı!',
+                                text: response.message,
+                                confirmButtonText: 'Tamam'
+                            }).then(function() {
+                                // Sayfayı yönlendir
+                                window.location.href = '/Users/Index';
+                            });
                         } else {
-                            $("#responseMessage").text(response.message).css("color", "red");
-                                                        alert(response.message);
-
-                             window.location.href = '/Signin/Index';
-
+                            // SweetAlert Error
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Giriş Başarısız!',
+                                text: response.message,
+                                confirmButtonText: 'Tamam'
+                            }).then(function() {
+                                // Sayfayı yönlendir
+                                window.location.href = '/Signin/Index';
+                            });
                         }
                     },
                     error: function () {
-                        $("#responseMessage").text("Bir hata oluştu.").css("color", "red");
-                                                    alert("Bir hata oluştu.");
-                         window.location.href = '/Signin/Index';
-
+                        // SweetAlert Error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Bir Hata Oluştu',
+                            text: 'Bir hata oluştu. Lütfen tekrar deneyin.',
+                            confirmButtonText: 'Tamam'
+                        }).then(function() {
+                            // Sayfayı yönlendir
+                            window.location.href = '/Signin/Index';
+                        });
                     }
                 });
             });
         });
-
-
     </script>
+
 </body>
 </html>
