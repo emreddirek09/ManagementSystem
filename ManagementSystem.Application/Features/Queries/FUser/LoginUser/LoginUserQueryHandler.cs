@@ -1,4 +1,7 @@
-﻿using ManagementSystem.Application.Repositories.Users;
+﻿using ManagementSystem.Application.DTOS;
+using ManagementSystem.Application.Exceptions;
+using ManagementSystem.Application.Repositories.Users;
+using ManagementSystem.Application.Token;
 using ManagementSystem.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +18,16 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
     {
         readonly UserManager<User> _userManager;
         readonly SignInManager<User> _signInMAnager;
+        readonly ITokenHandler _tokenHandler;
 
-        readonly IUserReadRepository _userReadRepository;
-
-        public LoginUserQueryHandler(UserManager<User> userManager, SignInManager<User> signInMAnager, IUserReadRepository userReadRepository)
+        public LoginUserQueryHandler(
+            UserManager<User> userManager,
+            SignInManager<User> signInMAnager,
+            ITokenHandler tokenHandler)
         {
             _userManager = userManager;
             _signInMAnager = signInMAnager;
-            _userReadRepository = userReadRepository;
+            _tokenHandler = tokenHandler;
         }
 
         public async Task<LoginUserQueryResponse> Handle(LoginUserQueryRequest request, CancellationToken cancellationToken)
@@ -32,29 +37,26 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
                 _user = await _userManager.FindByEmailAsync(request.UserNameOrMail);
 
             if (_user == null)
-                return new LoginUserQueryResponse()
+                return new LoginUserErrorQueryResponse()
                 {
                     Message = "Kayıt Bulunamadı",
-                    Success = false,
-                    Data = _user
+                    Success = false
                 };
 
             SignInResult result = await _signInMAnager.CheckPasswordSignInAsync(_user, request.UserPassword, false);
 
             if (result.Succeeded)
-                return new LoginUserQueryResponse()
+            {
+                DTOS.Token token = _tokenHandler.CreateAccessToken(5);
+
+                return new LoginUserSuccessQueryResponse()
                 {
                     Message = "Giriş Başarılı",
                     Success = true,
-                    Data = ""
-
+                    Token = token
                 };
-            return new LoginUserQueryResponse()
-            {
-                Message = "Kayıt Bulunamadı",
-                Success = false,
-                Data = _user
-            };
+            }
+            throw new AuthenticationErrorException();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace ManagementSystem.UI.Controllers
 
                 LoginUserQueryResponse res = await _mediator.Send(model);
 
-                return Json(new { success = res.Success, message = res.Message });
+                return Json(new { success = "res.Success", message = "res.Message" });
             }
 
             return Json(new { success = false, message = "Geçersiz giriş!" });
