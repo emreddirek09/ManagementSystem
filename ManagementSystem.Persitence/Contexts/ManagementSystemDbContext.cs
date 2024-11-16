@@ -1,5 +1,5 @@
 ﻿using ManagementSystem.Domain;
-using ManagementSystem.Domain.Common; 
+using ManagementSystem.Domain.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -31,17 +31,17 @@ namespace ManagementSystem.Persitence.Contexts
 
             modelBuilder.Entity<AppointmentStatus>()
                 .HasData(
-                new AppointmentStatus() { Id = "1", Appointments = null, StatusName = "Onaylandı", CreateDate = DateTime.Now, UpdateDate = null },
-                new AppointmentStatus() { Id = "2", Appointments = null, StatusName = "İptal Edildi", CreateDate = DateTime.Now, UpdateDate = null },
-                new AppointmentStatus() { Id = "3", Appointments = null, StatusName = "Tamamlandı", CreateDate = DateTime.Now, UpdateDate = null }
+                new AppointmentStatus() { Id = Guid.NewGuid(), Appointments = null, StatusName = "Onaylandı", CreateDate = DateTime.Now, UpdateDate = null },
+                new AppointmentStatus() { Id = Guid.NewGuid(), Appointments = null, StatusName = "İptal Edildi", CreateDate = DateTime.Now, UpdateDate = null },
+                new AppointmentStatus() { Id = Guid.NewGuid(), Appointments = null, StatusName = "Tamamlandı", CreateDate = DateTime.Now, UpdateDate = null }
                 );
 
             modelBuilder.Entity<Service>()
               .HasData(
-              new Service() { Id = "1", Appointments = null, Name = "Egzoz Gazı Ölçümü", CreateDate = DateTime.Now, UpdateDate = null },
-              new Service() { Id = "2", Appointments = null, Name = "Fren Testi", CreateDate = DateTime.Now, UpdateDate = null },
-              new Service() { Id = "3", Appointments = null, Name = "Far Ayarı", CreateDate = DateTime.Now, UpdateDate = null }
-              );                   
+              new Service() { Id = Guid.NewGuid(), Appointments = null, Name = "Egzoz Gazı Ölçümü", CreateDate = DateTime.Now, UpdateDate = null },
+              new Service() { Id = Guid.NewGuid(), Appointments = null, Name = "Fren Testi", CreateDate = DateTime.Now, UpdateDate = null },
+              new Service() { Id = Guid.NewGuid(), Appointments = null, Name = "Far Ayarı", CreateDate = DateTime.Now, UpdateDate = null }
+              );
             modelBuilder.Entity<UserRole>()
             .HasData(
             new UserRole() { Id = "1", Name = "Admin" },

@@ -1,7 +1,7 @@
 using ManagementSystem.Persitence;
 using ManagementSystem.Application;
 using ManagementSystem.Domain;
-using ManagementSystem.Application.Repositories; 
+using ManagementSystem.Application.Repositories;
 using ManagementSystem.Persitence.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<ManagementSystemDbContext>();
+builder.Services.AddIdentity<User, UserRole>(opt =>
+{
+    opt.Password.RequiredLength = 3;
+    opt.Password.RequireNonAlphanumeric = false;
+    opt.Password.RequireDigit = false;
+    opt.Password.RequireLowercase = false;
+    opt.Password.RequireUppercase = false;
+
+
+}).AddEntityFrameworkStores<ManagementSystemDbContext>();
 
 builder.Services.AddCors(options =>
 {

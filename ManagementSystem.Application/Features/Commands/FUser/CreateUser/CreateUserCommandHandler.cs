@@ -1,18 +1,22 @@
 ﻿
 using ManagementSystem.Application.Features.Queries.FUser.GetByEmailUser;
-using ManagementSystem.Application.Repositories.Users; 
+using ManagementSystem.Application.Repositories.Users;
+using ManagementSystem.Domain;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 
 namespace ManagementSystem.Application.Features.Commands.FUser.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
     {
         readonly IUserWriteRepository _userWriteRepository;
-         readonly private IMediator _mediator;
+        readonly UserManager<User> _userManager;
+        readonly private IMediator _mediator;
 
-        public CreateUserCommandHandler(IUserWriteRepository userWriteRepository, IMediator mediator)
+        public CreateUserCommandHandler(IUserWriteRepository userWriteRepository, UserManager<User> userManager, IMediator mediator)
         {
             _userWriteRepository = userWriteRepository;
+            _userManager = userManager;
             _mediator = mediator;
         }
 
@@ -26,21 +30,45 @@ namespace ManagementSystem.Application.Features.Commands.FUser.CreateUser
                     Success = false,
                     Message = "Eski kayıt girişi!"
                 };
-             
-            
-            await _userWriteRepository.AddAsync(new()
-            {
-                UserName = request.UserName,
-                Email = request.UserEmail,
-                PasswordHash = request.UserPassword
 
-            });
-            await _userWriteRepository.SaveAsync();
+            try
+            {
+                IdentityResult result = await _userManager.CreateAsync(new()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = request.UserName,
+                    Email = request.UserEmail,
+
+                }, request.UserPassword);
+
+                if (result.Succeeded)
+                    return new CreateUserCommandResponse
+                    {
+                        Success = true,
+                        Message = "Kullanıcı başarıyla oluşturuldu!"
+                    };
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            //await _userWriteRepository.AddAsync(new()
+            //{
+            //    UserName = request.UserName,
+            //    Email = request.UserEmail,
+            //    PasswordHash = request.UserPassword
+
+            //});
+            // await _userWriteRepository.SaveAsync();
+
+
 
             return new CreateUserCommandResponse
             {
-                Success = true,
-                Message = "Kullanıcı başarıyla oluşturuldu!"
+                Success = false,
+                Message = "Hata"
             };
         }
     }
