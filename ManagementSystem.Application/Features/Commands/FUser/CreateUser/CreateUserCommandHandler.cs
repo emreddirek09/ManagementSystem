@@ -35,7 +35,7 @@ namespace ManagementSystem.Application.Features.Commands.FUser.CreateUser
             {
                 IdentityResult result = await _userManager.CreateAsync(new()
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid(),
                     UserName = request.UserName,
                     Email = request.UserEmail,
 

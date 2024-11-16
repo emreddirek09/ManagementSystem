@@ -10,7 +10,8 @@ using ManagementSystem.Domain.Common;
 namespace ManagementSystem.Domain
 {
     public class Appointment : BaseEntity
-    { 
+    {
+        public Guid Id { get; set; }
 
         [Required]
         public DateTime AppointmentDate { get; set; }
