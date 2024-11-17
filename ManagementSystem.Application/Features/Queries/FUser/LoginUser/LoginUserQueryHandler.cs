@@ -62,7 +62,8 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
                 {
                     Message = "Giriş Başarılı",
                     Success = true,
-                    Token = token
+                    Token = token,
+                    Role= userRoles[0]
                 };
             }
 

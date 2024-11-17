@@ -28,12 +28,11 @@ namespace ManagementSystem.UI.Controllers
 
                 LoginUserSuccessQueryResponse res = await _mediator.Send(model);
 
-                return Json(new { success = res.Success, message = res.Message});
+                return Json(new { success = res.Success, message = res.Message, role = res.Role, token = res.Token });
             }
 
-            return Unauthorized();
 
-            // return Json(new { success = false, message = "Geçersiz giriş!" });
+            return Json(new { success = false, message = "Geçersiz giriş!" });
         }
 
     }
