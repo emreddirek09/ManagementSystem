@@ -145,39 +145,33 @@
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
                     success: function (response) {
-                        if (response.success) {
-                            // SweetAlert Success
+                        if (response.success) { 
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Başarıyla Kayıt Oldunuz!',
                                 text: response.message,
                                 confirmButtonText: 'Tamam'
-                            }).then(function() {
-                                // Yönlendirme işlemi
+                            }).then(function() { 
                                 window.location.href = '/Signin/Index';
                             });
-                        } else {
-                            // SweetAlert Error
+                        } else { 
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Kayıt Başarısız!',
                                 text: response.message,
                                 confirmButtonText: 'Tamam'
-                            }).then(function() {
-                                // Yönlendirme işlemi
+                            }).then(function() { 
                                 window.location.href = '/Signup/Index';
                             });
                         }
                     },
-                    error: function () {
-                        // SweetAlert Error
+                    error: function () { 
                         Swal.fire({
                             icon: 'error',
                             title: 'Bir Hata Oluştu',
                             text: 'Bir hata oluştu. Lütfen tekrar deneyin.',
                             confirmButtonText: 'Tamam'
-                        }).then(function() {
-                            // Yönlendirme işlemi
+                        }).then(function() { 
                             window.location.href = '/Signup/Index';
                         });
                     }
