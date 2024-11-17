@@ -38,6 +38,7 @@ namespace ManagementSystem.Application.Features.Commands.FUser.CreateUser
                     Id = Guid.NewGuid(),
                     UserName = request.UserName,
                     Email = request.UserEmail,
+                    PhoneNumber=request.PhoneNumber
 
                 }, request.UserPassword);
 

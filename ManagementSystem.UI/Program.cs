@@ -53,7 +53,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
         };
     });
+builder.Services.AddAuthorization(Options =>
+{
+    Options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    Options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
 
+});
 var app = builder.Build();
 
 
@@ -73,6 +78,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Signup}/{action=Index}/{id?}");
+   // pattern: "{controller=Signin}/{action=Index}/{id?}");//Admin/AddRole
+      pattern: "{controller=Admin}/{action=AssignRole}/{id?}");//Admin/AddRole
 
 app.Run();

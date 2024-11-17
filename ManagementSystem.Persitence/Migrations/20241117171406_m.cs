@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ManagementSystem.Persitence.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class m : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,7 +33,7 @@ namespace ManagementSystem.Persitence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -62,7 +62,7 @@ namespace ManagementSystem.Persitence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -78,7 +78,7 @@ namespace ManagementSystem.Persitence.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,7 +89,7 @@ namespace ManagementSystem.Persitence.Migrations
                 name: "UserRole",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -103,8 +103,8 @@ namespace ManagementSystem.Persitence.Migrations
                 name: "UserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,7 +115,7 @@ namespace ManagementSystem.Persitence.Migrations
                 name: "UserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -130,7 +130,7 @@ namespace ManagementSystem.Persitence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserRoleId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserRoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -196,9 +196,9 @@ namespace ManagementSystem.Persitence.Migrations
                 columns: new[] { "Id", "CreateDate", "StatusName", "UpdateDate" },
                 values: new object[,]
                 {
-                    { new Guid("295e791b-e66f-4b7a-8037-a5eaeaf2c64c"), new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(710), "İptal Edildi", null },
-                    { new Guid("7350eab5-0ec6-4514-a789-e52343238ba0"), new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(698), "Onaylandı", null },
-                    { new Guid("abcc36c8-c7c6-4d6f-be17-a15b2f1f0c7a"), new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(712), "Tamamlandı", null }
+                    { new Guid("0c351ef5-3d23-47da-8fcd-f3b809a18fd3"), new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5677), "Tamamlandı", null },
+                    { new Guid("6cdef731-0497-4cf6-a435-fa7fb8c27538"), new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5667), "İptal Edildi", null },
+                    { new Guid("8f0ee820-c03b-4807-b02a-42cb1078426a"), new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5654), "Onaylandı", null }
                 });
 
             migrationBuilder.InsertData(
@@ -206,18 +206,9 @@ namespace ManagementSystem.Persitence.Migrations
                 columns: new[] { "Id", "CreateDate", "Name", "UpdateDate" },
                 values: new object[,]
                 {
-                    { new Guid("8ecc39d0-d1ef-4020-b4da-72659b238bf3"), new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(834), "Fren Testi", null },
-                    { new Guid("e3a35dba-7e01-476e-8189-d151f43ebf5d"), new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(831), "Egzoz Gazı Ölçümü", null },
-                    { new Guid("fffa5bb6-1f09-4bbf-800d-64e4d89a0c59"), new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(836), "Far Ayarı", null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "UserRole",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "1", null, "Admin", null },
-                    { "2", null, "User", null }
+                    { new Guid("45aa33d2-7275-430e-8a7e-7caf1db7e325"), new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5827), "Egzoz Gazı Ölçümü", null },
+                    { new Guid("801deb79-4da6-44ed-a21a-29d475c47648"), new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5830), "Fren Testi", null },
+                    { new Guid("edc589f5-4182-4f75-bf05-74d19d4a78f4"), new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5832), "Far Ayarı", null }
                 });
 
             migrationBuilder.CreateIndex(

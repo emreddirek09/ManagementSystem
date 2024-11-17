@@ -61,6 +61,13 @@
                                                 Lütfen kullanıcı adınızı giriniz
                                             </div>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="username" class="form-label">Telefon Numarası <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="PhoneNumber" placeholder="Telefon Numaranızı giriniz" required="">
+                                            <div class="invalid-feedback">
+                                                Lütfen Telefon Numaranızı giriniz
+                                            </div>
+                                        </div>
 
                                         <div class="mb-2">
                                             <label for="userpassword" class="form-label">Şifre <span class="text-danger">*</span></label>
@@ -106,10 +113,7 @@
     <script src="~/velzon/assets/libs/feather-icons/feather.min.js"></script>
     <script src="~/velzon/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
     <script src="~/velzon/assets/js/plugins.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script type="text/javascript" src="~/velzon/assets/libs/choices.js/public/~/velzon/assets/scripts/choices.min.js"></script>
-    <script type="text/javascript" src="~/velzon/assets/libs/flatpickr/flatpickr.min.js"></script>
-    <!-- App js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> 
     <script src="~/velzon/assets/js/app.js"></script>
 
     <!-- particles js -->
@@ -131,7 +135,8 @@
                 var formData = {
                     UserName: $("#UserName").val(),
                     UserEmail: $("#UserEmail").val(),
-                    UserPassword: $("#UserPassword").val()
+                    UserPassword: $("#UserPassword").val(),
+                    PhoneNumber:$("#PhoneNumber").val()
                 };
 
                 $.ajax({

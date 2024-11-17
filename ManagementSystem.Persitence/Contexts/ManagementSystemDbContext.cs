@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ManagementSystem.Persitence.Contexts
 {
-    public class ManagementSystemDbContext : IdentityDbContext<User, UserRole, string>
+    public class ManagementSystemDbContext : IdentityDbContext<User, UserRole, Guid>
     {
         public ManagementSystemDbContext(DbContextOptions options) : base(options)
         {
@@ -20,13 +20,13 @@ namespace ManagementSystem.Persitence.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<IdentityUserLogin<string>>()
+            modelBuilder.Entity<IdentityUserLogin<Guid>>()
                 .HasKey(login => new { login.LoginProvider, login.ProviderKey });
 
-            modelBuilder.Entity<IdentityUserRole<string>>()
+            modelBuilder.Entity<IdentityUserRole<Guid>>()
                 .HasKey(userRole => new { userRole.UserId, userRole.RoleId });
 
-            modelBuilder.Entity<IdentityUserToken<string>>()
+            modelBuilder.Entity<IdentityUserToken<Guid>>()
                 .HasKey(token => new { token.UserId, token.LoginProvider, token.Name });
 
             modelBuilder.Entity<AppointmentStatus>()

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Domain
 {
-    public class UserRole: IdentityRole<string>
+    public class UserRole: IdentityRole<Guid>
     {   
 
         public ICollection<User> Users { get; set; } // User ile bire-çoğa ilişki

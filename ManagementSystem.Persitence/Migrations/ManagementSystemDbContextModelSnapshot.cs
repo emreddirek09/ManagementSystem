@@ -81,20 +81,20 @@ namespace ManagementSystem.Persitence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7350eab5-0ec6-4514-a789-e52343238ba0"),
-                            CreateDate = new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(698),
+                            Id = new Guid("8f0ee820-c03b-4807-b02a-42cb1078426a"),
+                            CreateDate = new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5654),
                             StatusName = "Onaylandı"
                         },
                         new
                         {
-                            Id = new Guid("295e791b-e66f-4b7a-8037-a5eaeaf2c64c"),
-                            CreateDate = new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(710),
+                            Id = new Guid("6cdef731-0497-4cf6-a435-fa7fb8c27538"),
+                            CreateDate = new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5667),
                             StatusName = "İptal Edildi"
                         },
                         new
                         {
-                            Id = new Guid("abcc36c8-c7c6-4d6f-be17-a15b2f1f0c7a"),
-                            CreateDate = new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(712),
+                            Id = new Guid("0c351ef5-3d23-47da-8fcd-f3b809a18fd3"),
+                            CreateDate = new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5677),
                             StatusName = "Tamamlandı"
                         });
                 });
@@ -123,20 +123,20 @@ namespace ManagementSystem.Persitence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e3a35dba-7e01-476e-8189-d151f43ebf5d"),
-                            CreateDate = new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(831),
+                            Id = new Guid("45aa33d2-7275-430e-8a7e-7caf1db7e325"),
+                            CreateDate = new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5827),
                             Name = "Egzoz Gazı Ölçümü"
                         },
                         new
                         {
-                            Id = new Guid("8ecc39d0-d1ef-4020-b4da-72659b238bf3"),
-                            CreateDate = new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(834),
+                            Id = new Guid("801deb79-4da6-44ed-a21a-29d475c47648"),
+                            CreateDate = new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5830),
                             Name = "Fren Testi"
                         },
                         new
                         {
-                            Id = new Guid("fffa5bb6-1f09-4bbf-800d-64e4d89a0c59"),
-                            CreateDate = new DateTime(2024, 11, 16, 22, 52, 46, 245, DateTimeKind.Local).AddTicks(836),
+                            Id = new Guid("edc589f5-4182-4f75-bf05-74d19d4a78f4"),
+                            CreateDate = new DateTime(2024, 11, 17, 20, 14, 5, 595, DateTimeKind.Local).AddTicks(5832),
                             Name = "Far Ayarı"
                         });
                 });
@@ -189,8 +189,8 @@ namespace ManagementSystem.Persitence.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserRoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid?>("UserRoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -201,8 +201,9 @@ namespace ManagementSystem.Persitence.Migrations
 
             modelBuilder.Entity("ManagementSystem.Domain.UserRole", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
@@ -216,21 +217,9 @@ namespace ManagementSystem.Persitence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserRole");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            Name = "User"
-                        });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -244,15 +233,15 @@ namespace ManagementSystem.Persitence.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.ToTable("RoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -266,15 +255,15 @@ namespace ManagementSystem.Persitence.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.ToTable("UserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -285,31 +274,31 @@ namespace ManagementSystem.Persitence.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.ToTable("UserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");

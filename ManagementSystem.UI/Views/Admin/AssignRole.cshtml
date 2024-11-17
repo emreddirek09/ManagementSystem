@@ -1,0 +1,189 @@
+﻿@using ManagementSystem.Domain
+@{
+    ViewData["Title"] = "AssignRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Add, Edit & Remove</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                            <div>
+                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table align-middle table-nowrap" id="userTable" border="1">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="sort" data-sort="UserName">Müşteri</th>
+                                    <th class="sort" data-sort="Email">Email</th>
+                                    <th class="sort" data-sort="PhoneNumber">Telefon</th>
+                                    <th class="sort" data-sort="action">Yetkilendir</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list form-check-all" id="userTableBody">
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+<script>
+
+    var response = @Html.Raw(Json.Serialize(ViewData["Users"]));
+     function loadUsers() {
+         var users = response.data;
+        var tableBody = $('#userTableBody');
+        tableBody.empty();
+        users.forEach(function(user) {
+            var row = $('<tr>');
+            row.append('<td>' + user.userName + '</td>');
+            row.append('<td>' + user.email + '</td>');
+            row.append('<td>' + user.phoneNumber + '</td>');
+            row.append(`
+                     <td>
+                        <div class="d-flex gap-2">
+                            <div class="edit">
+                                <button class="btn btn-sm btn-success edit-item-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteRecordModal"
+                                    data-user-name="${user.userName}">
+                                    Yetki Ver
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+            `);
+            tableBody.append(row);
+        });
+    }
+    $(document).ready(function () {
+        loadUsers();
+    });
+</script>
+
+
+
+<!-- Modal -->
+<div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+                               colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                        <h4>Yetki ver?</h4>
+                        <p class="text-muted mx-4 mb-0">Yetkinlendirme Adımındasınız ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" id="YetkiVer" data-bs-dismiss="modal">Onayla</button>
+                    <button type="button" class="btn w-sm btn-danger " id="delete-record">Vazgeç</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // "Yetki Ver" butonuna tıklama işlemi
+        $("#YetkiVer").click(function (event) {
+            event.preventDefault();
+
+            // Modal'dan UserName bilgisini alıyoruz
+            var userName = $("#deleteRecordModal").data('user-name'); // Modalın data-user-name özelliğini alıyoruz
+
+            if (!userName) {
+                // Eğer userName bulunamazsa hata mesajı göster
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata',
+                    text: 'UserName bilgisi alınamadı!',
+                    confirmButtonText: 'Tamam'
+                });
+                return;
+            }
+
+            // Form verisi olarak UserName'i gönderiyoruz
+            var formData = {
+                UserName: userName
+            };
+
+            // AJAX isteği
+            $.ajax({
+                url: '/Admin/AssignRole', // Role atama endpointi
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    if (response.success) {
+                        // Başarı durumunda SweetAlert göster
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Başarıyla Yetki Verildi!',
+                            text: response.message,
+                            confirmButtonText: 'Tamam'
+                        }).then(function() {
+                            // Başarıyla tamamlandığında sayfayı yönlendir
+                            window.location.href = '/Users/Index'; // Ya da başka bir sayfa
+                        });
+                    } else {
+                        // Başarısız durumda SweetAlert göster
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Yetki Verme Başarısız!',
+                            text: response.message,
+                            confirmButtonText: 'Tamam'
+                        }).then(function() {
+                            // Başarısız durumda farklı bir sayfaya yönlendirebiliriz
+                            window.location.href = '/Signin/Index'; // Ya da hata sayfası
+                        });
+                    }
+                },
+                error: function () {
+                    // AJAX isteği hata durumunda SweetAlert göster
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Bir Hata Oluştu',
+                        text: 'Bir hata oluştu, lütfen tekrar deneyin.',
+                        confirmButtonText: 'Tamam'
+                    });
+                }
+            });
+        });
+
+        // Modal açıldığında, tıklanan butonun data-user-name bilgisini modal'a aktar
+        $('#deleteRecordModal').on('show.bs.modal', function (event) {
+            // Modal açıldığında, tıklanan butonu al
+            var button = $(event.relatedTarget); // Bu, tıklanan butonu temsil eder
+            var userName = button.data('user-name'); // Butona ait data-user-name bilgisini alıyoruz
+
+            // Modal'a data-user-name bilgisini ekliyoruz
+            $(this).data('user-name', userName); // Modal'a bu bilgiyi kaydediyoruz
+        });
+    });
+</script>
+

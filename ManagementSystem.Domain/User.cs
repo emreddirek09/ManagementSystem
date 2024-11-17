@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ManagementSystem.Domain
 {
-    public class User : IdentityUser<string>
+    public class User : IdentityUser<Guid>
 
     {
         public Guid Id { get; set; }
