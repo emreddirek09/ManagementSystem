@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,9 @@ namespace ManagementSystem.Infrastructure.Services.Token
             _configuration = configuration;
         }
 
-        public Application.DTOS.Token CreateAccessToken(int minute)
+        public Application.DTOS.Token CreateAccessToken(int minute, List<Claim> claims)
         {
+
             Application.DTOS.Token token = new();
             SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_configuration["Token:SecurityKey"]));
             SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
@@ -30,6 +32,7 @@ namespace ManagementSystem.Infrastructure.Services.Token
                 audience: _configuration["Token:Audience"],
                 issuer: _configuration["Token:Issuer"],
                 expires: token.Expiration,
+                claims: claims,
                 notBefore: DateTime.UtcNow,
                 signingCredentials: signingCredentials
                 );

@@ -31,7 +31,7 @@ namespace ManagementSystem.Application.Features.Commands.FRole.AssignRole
                         Message = "Kullanıcı Bulunamadı"
                     };
                  
-                var result = await _userManager.AddToRoleAsync(user, "Admin");
+                var result = await _userManager.AddToRoleAsync(user, "User");
                 if (result.Succeeded)
                     return new AssignRoleCommandResponse()
                     {

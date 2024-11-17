@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementSystem.UI.Controllers
 {
+    [Authorize(Roles = "User")]
     public class UsersController : Controller
     {
-        [Authorize(AuthenticationSchemes = "User")]
-        public IActionResult Index()
+         public IActionResult Index()
         {
             return View();
         }

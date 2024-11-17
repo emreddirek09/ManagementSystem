@@ -4,10 +4,12 @@ using ManagementSystem.Application.Features.Queries.FUser.GetAllUsers;
 using ManagementSystem.Application.Features.Queries.FUser.LoginUser;
 using ManagementSystem.Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementSystem.UI.Controllers
 {
+    //[Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         readonly IMediator _mediator;

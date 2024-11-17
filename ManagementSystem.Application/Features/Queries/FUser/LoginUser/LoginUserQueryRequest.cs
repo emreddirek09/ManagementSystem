@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
 {
-    public class LoginUserQueryRequest : IRequest<LoginUserQueryResponse>
+    public class LoginUserQueryRequest : IRequest<LoginUserSuccessQueryResponse>
     {
         public string UserNameOrMail { get; set; }
         public string UserPassword { get; set; }

@@ -20,18 +20,20 @@ namespace ManagementSystem.UI.Controllers
             return View();
         }
 
-        [HttpPost] 
+        [HttpPost]
         public async Task<IActionResult> _GirisYap([FromBody] LoginUserQueryRequest model)
         {
             if (ModelState.IsValid)
             {
 
-                LoginUserQueryResponse res = await _mediator.Send(model);
+                LoginUserSuccessQueryResponse res = await _mediator.Send(model);
 
-                return Json(new { success = "res.Success", message = "res.Message" });
+                return Json(new { success = res.Success, message = res.Message});
             }
 
-            return Json(new { success = false, message = "Geçersiz giriş!" });
+            return Unauthorized();
+
+            // return Json(new { success = false, message = "Geçersiz giriş!" });
         }
 
     }

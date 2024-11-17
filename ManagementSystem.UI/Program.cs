@@ -6,6 +6,7 @@ using ManagementSystem.Persitence.Contexts;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ builder.Services.AddIdentity<User, UserRole>(opt =>
     opt.Password.RequireUppercase = false;
 
 
-}).AddEntityFrameworkStores<ManagementSystemDbContext>();
+}).AddEntityFrameworkStores<ManagementSystemDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddCors(options =>
 {
@@ -77,8 +78,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-   // pattern: "{controller=Signin}/{action=Index}/{id?}");//Admin/AddRole
-      pattern: "{controller=Admin}/{action=AssignRole}/{id?}");//Admin/AddRole
+    name: "default", 
+      pattern: "{controller=Signin}/{action=Index}/{id?}");
 
 app.Run();

@@ -17,13 +17,7 @@ namespace ManagementSystem.Persitence
             services.AddScoped<IUserReadRepository, UserReadRepository>();
             services.AddScoped<IUserWriteRepository, UserWriteRepository>();
             services.AddScoped<ITokenHandler, TokenHandler>();
-
-            //services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
-            //services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
-            //services.AddScoped<IOrderReadRepository, OrderReadRepository>();
-            //services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
-            //services.AddScoped<IProductReadRepository, ProductReadRepository>();
-            //services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+             
 
 
         }
