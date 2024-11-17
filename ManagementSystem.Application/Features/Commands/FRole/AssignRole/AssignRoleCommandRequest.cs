@@ -10,7 +10,7 @@ namespace ManagementSystem.Application.Features.Commands.FRole.AssignRole
     public class AssignRoleCommandRequest:IRequest<AssignRoleCommandResponse>
     {
         public string UserName { get; set; }
-        //public string RoleName { get; set; }
+        public string RoleName { get; set; }
 
     }
 }

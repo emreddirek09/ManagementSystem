@@ -65,7 +65,7 @@
                             <div class="edit">
                                 <button class="btn btn-sm btn-success edit-item-btn"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#deleteRecordModal"
+                                    data-bs-target="#AssignRoleModal"
                                     data-user-name="${user.userName}">
                                     Yetki Ver
                                 </button>
@@ -84,7 +84,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade zoomIn" id="AssignRoleModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -98,6 +98,13 @@
                         <h4>Yetki ver?</h4>
                         <p class="text-muted mx-4 mb-0">Yetkinlendirme Adımındasınız ?</p>
                     </div>
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupSelect01">Role Seç</label>
+                        <select class="form-select" id="inputGroupSelect01">
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                     <button type="button" class="btn w-sm btn-light" id="YetkiVer" data-bs-dismiss="modal">Onayla</button>
@@ -109,62 +116,41 @@
 </div>
 <script>
     $(document).ready(function () {
-        // "Yetki Ver" butonuna tıklama işlemi
-        $("#YetkiVer").click(function (event) {
+         $("#YetkiVer").click(function (event) {
             event.preventDefault();
-
-            // Modal'dan UserName bilgisini alıyoruz
-            var userName = $("#deleteRecordModal").data('user-name'); // Modalın data-user-name özelliğini alıyoruz
-
-            if (!userName) {
-                // Eğer userName bulunamazsa hata mesajı göster
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Hata',
-                    text: 'UserName bilgisi alınamadı!',
-                    confirmButtonText: 'Tamam'
-                });
-                return;
-            }
-
-            // Form verisi olarak UserName'i gönderiyoruz
+            var userName = $("#AssignRoleModal").data('user-name');
+            var selectedRole = $("#inputGroupSelect01").val();
             var formData = {
-                UserName: userName
+                UserName: userName,
+                RoleName: selectedRole
             };
-
-            // AJAX isteği
             $.ajax({
-                url: '/Admin/AssignRole', // Role atama endpointi
+                url: '/Admin/AssignRole',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(formData),
                 success: function (response) {
                     if (response.success) {
-                        // Başarı durumunda SweetAlert göster
                         Swal.fire({
                             icon: 'success',
                             title: 'Başarıyla Yetki Verildi!',
                             text: response.message,
                             confirmButtonText: 'Tamam'
                         }).then(function() {
-                            // Başarıyla tamamlandığında sayfayı yönlendir
-                            window.location.href = '/Users/Index'; // Ya da başka bir sayfa
+                            window.location.href = '/Users/Index';
                         });
                     } else {
-                        // Başarısız durumda SweetAlert göster
                         Swal.fire({
                             icon: 'error',
                             title: 'Yetki Verme Başarısız!',
                             text: response.message,
                             confirmButtonText: 'Tamam'
                         }).then(function() {
-                            // Başarısız durumda farklı bir sayfaya yönlendirebiliriz
-                            window.location.href = '/Signin/Index'; // Ya da hata sayfası
+                            window.location.href = '/Signin/Index';
                         });
                     }
                 },
                 error: function () {
-                    // AJAX isteği hata durumunda SweetAlert göster
                     Swal.fire({
                         icon: 'error',
                         title: 'Bir Hata Oluştu',
@@ -175,14 +161,10 @@
             });
         });
 
-        // Modal açıldığında, tıklanan butonun data-user-name bilgisini modal'a aktar
-        $('#deleteRecordModal').on('show.bs.modal', function (event) {
-            // Modal açıldığında, tıklanan butonu al
-            var button = $(event.relatedTarget); // Bu, tıklanan butonu temsil eder
-            var userName = button.data('user-name'); // Butona ait data-user-name bilgisini alıyoruz
-
-            // Modal'a data-user-name bilgisini ekliyoruz
-            $(this).data('user-name', userName); // Modal'a bu bilgiyi kaydediyoruz
+        $('#AssignRoleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var userName = button.data('user-name');
+            $(this).data('user-name', userName);
         });
     });
 </script>

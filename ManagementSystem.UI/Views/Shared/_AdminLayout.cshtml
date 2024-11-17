@@ -38,7 +38,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box horizontal-logo">
-                            <a class="logo logo-dark" asp-area="" asp-controller="CheckAdminUser" asp-action="Index">
+                            <a class="logo logo-dark" asp-area="" asp-controller="Admin" asp-action="Index">
                                 <span class="logo-sm">
                                     <img src="~/velzon/assets/images/logo-sm.png" alt="" height="22">
                                 </span>
@@ -46,7 +46,7 @@
                                     <img src="~/velzon/assets/images/logo-dark.png" alt="" height="17">
                                 </span>
                             </a>
-                            <a class="logo logo-light" asp-area="" asp-controller="CheckAdminUser" asp-action="Index">
+                            <a class="logo logo-light" asp-area="" asp-controller="Admin" asp-action="Index">
                                 <span class="logo-sm">
                                     <img src="~/velzon/assets/images/logo-sm.png" alt="" height="22">
                                 </span>
@@ -86,11 +86,11 @@
                                                         <div class="dropdown-item bg-transparent text-wrap">
 
 
-                                                            <a href="@Url.Content("CheckAdminUser/index")" class="btn btn-soft-secondary btn-sm btn-rounded">
+                                                            <a href="@Url.Content("Admin/index")" class="btn btn-soft-secondary btn-sm btn-rounded">
                                                                 how to
                                                                 setup <i class="mdi mdi-magnify ms-1"></i>
                                                             </a>
-                                                            <a href="@Url.Content("CheckAdminUser/index")" class="btn btn-soft-secondary btn-sm btn-rounded">
+                                                            <a href="@Url.Content("Admin/index")" class="btn btn-soft-secondary btn-sm btn-rounded">
                                                                 buttons
                                                                 <i class="mdi mdi-magnify ms-1"></i>
                                                             </a>
@@ -163,7 +163,7 @@
                                 </div>
 
                                 <div class="text-center pt-3 pb-1">
-                                    <a href="CheckAdminUser/index" class="btn btn-primary btn-sm">
+                                    <a href="Admin/index" class="btn btn-primary btn-sm">
                                         View All Results
                                         <i class="ri-arrow-right-line ms-1"></i>
                                     </a>
@@ -210,8 +210,8 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
-                                <a class="dropdown-item" asp-area="" asp-controller="CheckAdminUser" asp-action="Index"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profil</span></a>
-                                <a class="dropdown-item" asp-area="" asp-controller="CheckAdminUser" asp-action="Index"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Çıkış</span></a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profil</span></a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Çıkış</span></a>
 
 
                             </div>
@@ -225,7 +225,7 @@
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <!-- Dark Logo-->
-                <a class="logo logo-dark" asp-area="" asp-controller="CheckAdminUser" asp-action="Index">
+                <a class="logo logo-dark" asp-area="" asp-controller="Admin" asp-action="Index">
                     <span class="logo-sm">
                         <img src="~/velzon/assets/images/logo-sm.png" alt="" height="22">
                     </span>
@@ -234,7 +234,7 @@
                     </span>
                 </a>
                 <!-- Light Logo-->
-                <a class="logo logo-light" asp-area="" asp-controller="CheckAdminUser" asp-action="Index">
+                <a class="logo logo-light" asp-area="" asp-controller="Admin" asp-action="Index">
                     <span class="logo-sm">
                         <img src="~/velzon/assets/images/logo-sm.png" alt="" height="22">
                     </span>
@@ -258,14 +258,7 @@
                                 <i class="ri-rocket-line"></i> <span data-key="t-landing">Role Tanımla</span>
                                 <span class="badge badge-pill bg-danger" data-key="t-new">New</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" asp-area="" asp-controller="CheckAdminUser" asp-action="Index">
-                                <i class="ri-rocket-line"></i> <span data-key="t-landing"> Kullanıcılar</span>
-                                <span class="badge badge-pill bg-danger" data-key="t-new">New</span>
-                            </a>
-                        </li>
-
+                        </li> 
                         <li class="nav-item">
                             <a class="nav-link menu-link" asp-area="" asp-controller="Admin" asp-action="AssignRole">
                                 <i class="ri-rocket-line"></i> <span data-key="t-landing">Yetkilendirme</span>
@@ -276,7 +269,7 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" asp-area="" asp-controller="CheckAdminUser" asp-action="Index">
+                            <a class="nav-link menu-link" asp-area="" asp-controller="Admin" asp-action="Index">
                                 <i class="ri-rocket-line"></i> <span data-key="t-landing">Randevular</span>
                                 <span class="badge badge-pill bg-danger" data-key="t-new">New</span>
                             </a>
