@@ -42,11 +42,11 @@ namespace ManagementSystem.Persitence.Contexts
               new Service() { Id = Guid.NewGuid(), Appointments = null, Name = "Fren Testi", CreateDate = DateTime.Now, UpdateDate = null },
               new Service() { Id = Guid.NewGuid(), Appointments = null, Name = "Far Ayarı", CreateDate = DateTime.Now, UpdateDate = null }
               );
-            modelBuilder.Entity<UserRole>()
-            .HasData(
-            new UserRole() { Id = "1", Name = "Admin" },
-            new UserRole() { Id = "2", Name = "User" }
-            );
+            //modelBuilder.Entity<UserRole>()
+            //.HasData(
+            //new UserRole() { Id = "1", Name = "Admin" },
+            //new UserRole() { Id = "2", Name = "User" }
+            //);
 
         }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
