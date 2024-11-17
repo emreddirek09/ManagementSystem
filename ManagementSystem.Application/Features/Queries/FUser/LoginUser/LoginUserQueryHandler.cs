@@ -52,7 +52,13 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
                 var authClaims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub,_user.UserName!),
-                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
+                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Typ,userRoles[0]),
+                    new Claim(JwtRegisteredClaimNames.Name,_user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Email,_user.Email),
+                    new Claim(JwtRegisteredClaimNames.Prn,_user.PhoneNumber)
+
+
                 };
                 authClaims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
 
@@ -63,35 +69,9 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
                     Message = "Giriş Başarılı",
                     Success = true,
                     Token = token,
-                    Role= userRoles[0]
+                    Role = userRoles[0]
                 };
-            }
-
-
-            //User _user = await _userManager.FindByNameAsync(request.UserNameOrMail);
-            //if (_user == null)
-            //    _user = await _userManager.FindByEmailAsync(request.UserNameOrMail);
-
-            //if (_user == null)
-            //    return new LoginUserErrorQueryResponse()
-            //    {
-            //        Message = "Kayıt Bulunamadı",
-            //        Success = false
-            //    };
-
-            //SignInResult result = await _signInMAnager.CheckPasswordSignInAsync(_user, request.UserPassword, false);
-
-            //if (result.Succeeded)
-            //{
-            //    DTOS.Token token = _tokenHandler.CreateAccessToken(5);
-
-            //    return new LoginUserSuccessQueryResponse()
-            //    {
-            //        Message = "Giriş Başarılı",
-            //        Success = true,
-            //        Token = token
-            //    };
-            //}
+            } 
             throw new AuthenticationErrorException();
         }
     }

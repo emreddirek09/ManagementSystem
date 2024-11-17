@@ -4,6 +4,7 @@ using ManagementSystem.Persitence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagementSystem.Persitence.Migrations
 {
     [DbContext(typeof(ManagementSystemDbContext))]
-    partial class ManagementSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241117212345_mig2")]
+    partial class mig2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +33,6 @@ namespace ManagementSystem.Persitence.Migrations
 
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("AppointmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");

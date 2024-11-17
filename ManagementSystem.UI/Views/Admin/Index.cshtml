@@ -3,6 +3,35 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+ 
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card"> 
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table align-middle table-nowrap" id="Appointments" border="1">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="sort" data-sort="UserName">Müşteri Adı</th>
+                                    <th class="sort" data-sort="Email">Email</th>
+                                    <th class="sort" data-sort="PhoneNumber">Telefon</th>
+                                    <th class="sort" data-sort="Service">Hizmet Bilgisi</th>
+                                    <th class="sort" data-sort="Date">Tarih & Saat</th>
+                                 </tr>
+                            </thead>
+                            <tbody class="list form-check-all" id="AppointmentsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1>Admin SAyfası</h1>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
 

@@ -1,8 +1,72 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h1>hello</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="live-preview">
+                    <div class="row gy-4">   
 
+                        <div class="col-xxl-3 col-md-6">
+                            <label for="exampleDataList" class="form-label">Hizmet Seçin</label>
+                            <input class="form-control" list="datalistOptions" id="exampleDataList"
+                                   placeholder="Hizmet Seçin">
+                            <datalist id="datalistOptions">
+                                <option value="Fren Testi"></option>
+                                <option value="Far Ayarı"></option>
+                                <option value="Egzoz Gazı Ölçümü"></option>
+                            </datalist>
+                        </div>
+
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="exampleInputdate" class="form-label">Tarih</label>
+                                <input type="date" class="form-control" id="exampleInputdate">
+                            </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="exampleInputtime" class="form-label">Saat</label>
+                                <input type="time" class="form-control" id="exampleInputtime">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <button class="btn btn-outline-success" type="button" id="inputGroupFileAddon04">Kaydet</button>
+                        </div>
+                    </div>
+
+                    <!--end row-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table align-middle table-nowrap" id="Appointments" border="1">
+                            <thead class="table-light">
+                                <tr> 
+                                    <th class="sort" data-sort="Service">Hizmet Bilgisi</th>
+                                    <th class="sort" data-sort="Date">Tarih & Saat</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list form-check-all" id="AppointmentsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>

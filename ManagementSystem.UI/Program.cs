@@ -38,7 +38,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer("User", options =>
+    .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new()
         {
@@ -79,6 +79,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default", 
-      pattern: "{controller=Signin}/{action=Index}/{id?}");
+      pattern: "{controller=Users}/{action=Index}/{id?}");
 
 app.Run();

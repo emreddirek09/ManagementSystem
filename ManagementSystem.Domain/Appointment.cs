@@ -11,22 +11,8 @@ namespace ManagementSystem.Domain
 {
     public class Appointment : BaseEntity
     {
-        public Guid Id { get; set; }
-
-        [Required]
+        public string AppointmentName { get; set; }         
         public DateTime AppointmentDate { get; set; }
-
-        [Required]
-        public Guid StatusId { get; set; }
-        [ForeignKey("StatusId")]
-        public AppointmentStatus Status { get; set; } // Appointment ile AppointmentStatus arasında ilişki
-
-        [Required]
-        public Guid ServiceId { get; set; }
-        [ForeignKey("ServiceId")]
-        public Service Service { get; set; } // Appointment ile Service arasında ilişki
-
-        [Required]
         public Guid UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; } // Appointment ile User arasında ilişki

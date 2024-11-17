@@ -9,7 +9,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Add, Edit & Remove</h4>
+                <h4 class="card-title mb-0">Yeni Müşteri</h4>
             </div><!-- end card header -->
 
             <div class="card-body">
@@ -17,7 +17,7 @@
                     <div class="row g-4 mb-3">
                         <div class="col-sm-auto">
                             <div>
-                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
+                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Ekle</button>
                             </div>
                         </div>
                     </div>
@@ -47,6 +47,7 @@
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
+@* RoleTanımlama start*@
 <script>
 
     var response = @Html.Raw(Json.Serialize(ViewData["Users"]));
@@ -81,9 +82,6 @@
     });
 </script>
 
-
-
-<!-- Modal -->
 <div class="modal fade zoomIn" id="AssignRoleModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -137,7 +135,7 @@
                             text: response.message,
                             confirmButtonText: 'Tamam'
                         }).then(function() {
-                            window.location.href = '/Users/Index';
+                            window.location.href = '/Admin/AssignRole';
                         });
                     } else {
                         Swal.fire({
@@ -146,7 +144,7 @@
                             text: response.message,
                             confirmButtonText: 'Tamam'
                         }).then(function() {
-                            window.location.href = '/Signin/Index';
+                            window.location.href = '/Admin/AssignRole';
                         });
                     }
                 },
@@ -169,3 +167,120 @@
     });
 </script>
 
+@* RoleTanımlama end*@
+
+
+<div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        id="close-modal"></button>
+            </div>
+            <form>
+                <div class="modal-body">
+
+
+                    <div class="mb-3">
+                        <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="UserEmail" placeholder="Mail adresi giriniz" required="">
+                        <div class="invalid-feedback">
+                            Lütfen Mail adresi giriniz
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Kullanıcı Adı <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="UserName" placeholder="Kullanıcı adınızı giriniz" required="">
+                        <div class="invalid-feedback">
+                            Lütfen kullanıcı adınızı giriniz
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Telefon Numarası <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="PhoneNumber" placeholder="Telefon Numaranızı giriniz" required="">
+                        <div class="invalid-feedback">
+                            Lütfen Telefon Numaranızı giriniz
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="userpassword" class="form-label">Şifre <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="UserPassword" placeholder="Şifre giriniz" required="">
+                        <div class="invalid-feedback">
+                            Lütfen şifrenizi giriniz
+                        </div>
+                    </div>
+                     
+                    <div id="responseMessage"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="üye_ol">Ekle</button> 
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#üye_ol").click(function (event) {
+            event.preventDefault();
+            var formData = {
+                UserName: $("#UserName").val(),
+                UserEmail: $("#UserEmail").val(),
+                UserPassword: $("#UserPassword").val(),
+                PhoneNumber:$("#PhoneNumber").val()
+            };
+
+            $.ajax({
+                url: '/Signup/üyeOl',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    if (response.success) {
+                        // SweetAlert Success
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Başarıyla Kayıt Oldunuz!',
+                            text: response.message,
+                            confirmButtonText: 'Tamam'
+                        }).then(function() {
+                            // Yönlendirme işlemi
+                            window.location.href = '/Admin/AssignRole';
+                        });
+                    } else {
+                        // SweetAlert Error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Kayıt Başarısız!',
+                            text: response.message,
+                            confirmButtonText: 'Tamam'
+                        }).then(function() {
+                            // Yönlendirme işlemi
+                            window.location.href = '/Admin/AssignRole';
+                        });
+                    }
+                },
+                error: function () {
+                    // SweetAlert Error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Bir Hata Oluştu',
+                        text: 'Bir hata oluştu. Lütfen tekrar deneyin.',
+                        confirmButtonText: 'Tamam'
+                    }).then(function() {
+                        // Yönlendirme işlemi
+                        window.location.href = '/Admin/AssignRole';
+                    });
+                }
+            });
+        });
+    });
+</script>

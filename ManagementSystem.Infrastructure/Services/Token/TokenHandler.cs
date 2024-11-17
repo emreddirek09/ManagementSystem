@@ -32,7 +32,7 @@ namespace ManagementSystem.Infrastructure.Services.Token
                 audience: _configuration["Token:Audience"],
                 issuer: _configuration["Token:Issuer"],
                 expires: token.Expiration,
-                claims: claims,
+                claims: claims,                                 
                 notBefore: DateTime.UtcNow,
                 signingCredentials: signingCredentials
                 );
