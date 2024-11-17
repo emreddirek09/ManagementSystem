@@ -5,6 +5,7 @@ using ManagementSystem.Application.Repositories;
 using ManagementSystem.Persitence.Contexts;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,8 +36,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddAuthentication("Admin")
-    .AddJwtBearer(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer("User", options =>
     {
         options.TokenValidationParameters = new()
         {
@@ -67,6 +68,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
