@@ -1,23 +1,31 @@
 ﻿using ManagementSystem.Application.Features.Commands.FAppointments.CreateAppointments;
 using ManagementSystem.Application.Features.Commands.FRole.CreateRole;
+using ManagementSystem.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementSystem.UI.Controllers
 {
-    //[Authorize(Policy = "UserPolicy")]
+    [Authorize(Roles ="User")]
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;
-
-        public UsersController(IMediator mediator)
+        private readonly UserManager<User> _userManager;
+        public UsersController(IMediator mediator, UserManager<User> userManager)
         {
             _mediator = mediator;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
+            var a = await _userManager.GetUserAsync(HttpContext.User);
+            var b = await _userManager.GetRolesAsync(a);
+
+
             return View();
         }
          

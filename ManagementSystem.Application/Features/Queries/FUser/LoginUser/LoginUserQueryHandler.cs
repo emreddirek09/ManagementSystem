@@ -46,8 +46,11 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
                 };
             SignInResult result = await _signInMAnager.CheckPasswordSignInAsync(_user, request.UserPassword, false);
 
+
             if (result.Succeeded)
             {
+                await _signInMAnager.SignInAsync(_user, false, null);
+
                 var userRoles = await _userManager.GetRolesAsync(_user);
                 var authClaims = new List<Claim>
                 {
@@ -71,7 +74,7 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
                     Token = token,
                     Role = userRoles[0]
                 };
-            } 
+            }
             throw new AuthenticationErrorException();
         }
     }

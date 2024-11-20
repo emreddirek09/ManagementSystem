@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementSystem.UI.Controllers
 {
-    //[Authorize(Policy = "AdminPolicy")]
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         readonly IMediator _mediator;
