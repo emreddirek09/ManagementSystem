@@ -25,6 +25,8 @@ namespace ManagementSystem.UI.Controllers
             var a = await _userManager.GetUserAsync(HttpContext.User);
             var b = await _userManager.GetRolesAsync(a);
 
+            var userName = HttpContext.User.Identity.Name;
+            var role = HttpContext.User.Claims.FirstOrDefault(a=>a.Type== "nebakiyonle")?.Value;
 
             return View();
         }

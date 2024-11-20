@@ -201,7 +201,7 @@
                                     <img class="rounded-circle header-profile-user" src="~/velzon/assets/images/users/avatar-1.jpg" alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                                            Emre Direk
+                                            @User.Claims.FirstOrDefault(x=>x.Type=="nebakiyonle").Value
                                         </span>
                                         <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
                                     </span>

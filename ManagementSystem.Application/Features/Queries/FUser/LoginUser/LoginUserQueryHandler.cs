@@ -49,20 +49,22 @@ namespace ManagementSystem.Application.Features.Queries.FUser.LoginUser
 
             if (result.Succeeded)
             {
-                await _signInMAnager.SignInAsync(_user, false, null);
-
                 var userRoles = await _userManager.GetRolesAsync(_user);
                 var authClaims = new List<Claim>
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub,_user.UserName!),
-                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Typ,userRoles[0]),
-                    new Claim(JwtRegisteredClaimNames.Name,_user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Email,_user.Email),
-                    new Claim(JwtRegisteredClaimNames.Prn,_user.PhoneNumber)
+                    new Claim(ClaimTypes.Role,_user.PhoneNumber),
+
 
 
                 };
+
+                await _userManager.AddClaimAsync(_user, new Claim("nebakiyonle", _user.UserName));
+
+                await _signInMAnager.SignInAsync(_user,false);
+
+
+            
+
                 authClaims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
 
                 DTOS.Token token = _tokenHandler.CreateAccessToken(5, authClaims);
